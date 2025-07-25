@@ -80,7 +80,7 @@ export default function ContactForm() {
             <MessageSquare className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Get In Touch</h1>
-          <p className="text-gray-300">We'd love to hear from you. Send us a message!</p>
+          <p className="text-gray-300">We love to hear from you. Send us a message</p>
         </div>
 
         {/* Form Container */}
@@ -220,7 +220,7 @@ export default function ContactForm() {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-gray-400 text-sm">
-            We'll get back to you within 24 hours
+            Well get back to you within 24 hours
           </p>
         </div>
       </div>

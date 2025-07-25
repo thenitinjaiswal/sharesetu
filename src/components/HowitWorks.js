@@ -79,7 +79,7 @@ export default function HowItWorks() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [steps]);
 
   return (
     <section className="py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-green-50 relative overflow-hidden">

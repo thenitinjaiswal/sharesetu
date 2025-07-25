@@ -113,7 +113,7 @@ export default function Hero() {
 
             {/* Description */}
             <p className="text-xl text-white/90 leading-relaxed max-w-xl">
-              Get back what's rightfully yours. We help you recover unclaimed funds from IEPF, Provident Funds, Insurance, Mutual Funds, and more through our government-certified platform.
+              Get back whats rightfully yours. We help you recover unclaimed funds from IEPF, Provident Funds, Insurance, Mutual Funds, and more through our government-certified platform.
             </p>
 
             {/* Enhanced Stats */}
