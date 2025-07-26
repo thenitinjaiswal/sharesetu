@@ -84,22 +84,21 @@ export default function Header() {
             <nav className="hidden lg:flex items-center space-x-2">
               {navLinks.map((link, index) => (
                 <div key={link.href} className="relative">
-                  <Link href={link.href}>
-                    <a
-                      className="relative flex items-center space-x-2 px-4 py-3 text-gray-700 hover:text-green-700 font-bold transition-all duration-300 rounded-xl hover:bg-green-50 group"
-                      onMouseEnter={() => setHoveredItem(index)}
-                      onMouseLeave={() => setHoveredItem(null)}
-                    >
-                      <div className="w-6 h-6 flex items-center justify-center">
-                        <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
-                        </svg>
-                      </div>
-                      <span className="group-hover:translate-x-0.5 transition-transform duration-300">
-                        {link.label}
-                      </span>
-                      <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-green-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
-                    </a>
+                  <Link 
+                    href={link.href}
+                    className="relative flex items-center space-x-2 px-4 py-3 text-gray-700 hover:text-green-700 font-bold transition-all duration-300 rounded-xl hover:bg-green-50 group"
+                    onMouseEnter={() => setHoveredItem(index)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                  >
+                    <div className="w-6 h-6 flex items-center justify-center">
+                      <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
+                      </svg>
+                    </div>
+                    <span className="group-hover:translate-x-0.5 transition-transform duration-300">
+                      {link.label}
+                    </span>
+                    <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-green-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
                   </Link>
 
                   {/* Tooltip */}
@@ -122,22 +121,24 @@ export default function Header() {
                   </svg>
                   <span className="hidden xl:inline">Call Now</span>
                 </a>
-                <Link href="/contact">
-                  <a className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white px-8 py-3 rounded-xl font-black shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2 group">
-                    <span>Get Started Free</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
+                <Link 
+                  href="/contact"
+                  className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white px-8 py-3 rounded-xl font-black shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2 group"
+                >
+                  <span>Get Started Free</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </div>
             </nav>
 
-            {/* Menu toggle remains unchanged */}
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl hover:bg-green-50 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-500/20 group"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               <div className="flex flex-col space-y-1.5">
                 <span className={`block w-7 h-0.5 bg-gray-700 transition-all duration-300 ${
@@ -153,7 +154,53 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile menu and overlay untouched for brevity */}
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl shadow-2xl border-b-2 border-green-100">
+              <nav className="px-4 py-6 space-y-4">
+                {navLinks.map((link) => (
+                  <Link 
+                    key={link.href}
+                    href={link.href}
+                    className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-green-700 font-bold transition-all duration-300 rounded-xl hover:bg-green-50 group"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className="w-6 h-6 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col">
+                      <span>{link.label}</span>
+                      <span className="text-sm text-gray-500">{link.description}</span>
+                    </div>
+                  </Link>
+                ))}
+                
+                <div className="pt-4 border-t border-gray-200 space-y-3">
+                  <a
+                    href="tel:+919999999999"
+                    className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-green-700 font-bold transition-colors duration-300 rounded-lg hover:bg-gray-50"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>Call Now</span>
+                  </a>
+                  <Link 
+                    href="/contact"
+                    className="w-full bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white px-6 py-3 rounded-xl font-black shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 group"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span>Get Started Free</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
