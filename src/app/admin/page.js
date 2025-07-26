@@ -12,7 +12,7 @@ export default function AdminPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-    if (pass === process.env.NEXT_PUBLIC_ADMIN_PASS || pass === '') {
+    if (pass === process.env.ADMIN_PASS || pass === '') {
       // fallback if NEXT_PUBLIC_ADMIN_PASS is not accessible on client (which it isn't)
     }
     const submittedPass = pass;
