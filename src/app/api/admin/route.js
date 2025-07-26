@@ -4,7 +4,7 @@ import Contact from '../../../models/Contact';
 export async function POST(req) {
   try {
     const { password } = await req.json();
-    if (password !== process.env.NEXT_PUBLIC_ADMIN_PASS) {
+    if (password !== process.env.ADMIN_PASS) {
       return new Response('Unauthorized', { status: 401 });
     }
     await dbConnect();
