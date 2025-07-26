@@ -35,6 +35,8 @@ export default function AdminPage() {
     setPass('');
     setContacts(null);
   };
+console.log("ENV PASSWORD:", process.env.ADMIN_PASS);
+console.log("SUBMITTED PASSWORD:", password);
 
   return (
     <main className="">
