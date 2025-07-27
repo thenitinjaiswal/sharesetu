@@ -6,31 +6,28 @@ const dbConfig = {
   host: process.env.MYSQL_HOST || 'localhost',
   user: process.env.MYSQL_USER || 'root',
   password: process.env.MYSQL_PASSWORD || '',
-  database: process.env.MYSQL_DATABASE || 'sharesetu_local',
+  database: process.env.MYSQL_DATABASE || 'railway',
   port: parseInt(process.env.MYSQL_PORT) || 3306,
-  // Remove these problematic options:
-  // acquireTimeout: 60000,     ❌ Invalid for single connections
-  // timeout: 60000,           ❌ Invalid for single connections  
-  // reconnect: true,          ❌ Invalid for single connections
-  
-  // Keep only valid connection options:
-  connectTimeout: 20000,        // ✅ Valid connection timeout
-  multipleStatements: false,    // ✅ Security best practice
+  connectTimeout: 60000,
+  acquireTimeout: 60000,
+  timeout: 60000,
 };
 
 export async function dbConnect() {
   try {
     if (!connection) {
-      // Create connection
       connection = await mysql.createConnection(dbConfig);
       
-      console.log(`✅ Connected to MySQL database: ${dbConfig.database} on ${dbConfig.host}`);
+      console.log(`✅ Connected to MySQL database: ${dbConfig.database} on Railway`);
       
       // Create contacts table if it doesn't exist
       await connection.execute(`
         CREATE TABLE IF NOT EXISTS contacts (
           id INT AUTO_INCREMENT PRIMARY KEY,
           phone VARCHAR(15) NOT NULL UNIQUE,
+          name VARCHAR(100) NULL,
+          email VARCHAR(255) NULL,
+          message TEXT NULL,
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
           INDEX idx_phone (phone),
@@ -42,17 +39,7 @@ export async function dbConnect() {
     }
     return connection;
   } catch (error) {
-    console.error('❌ Database connection failed:', error.message);
-    
-    // Detailed error handling
-    if (error.code === 'ECONNREFUSED') {
-      console.error('💡 Fix: Start your MySQL service');
-    } else if (error.code === 'ER_ACCESS_DENIED_ERROR') {
-      console.error('💡 Fix: Check your username and password in .env.local');
-    } else if (error.code === 'ER_BAD_DB_ERROR') {
-      console.error('💡 Fix: Create the database first');
-    }
-    
+    console.error('❌ Database connection failed:', error);
     throw error;
   }
 }
