@@ -122,7 +122,7 @@ export default function Header() {
                   <span className="hidden xl:inline">Call Now</span>
                 </a>
                 <Link 
-                  href="/contact"
+                 href="https://wa.me/918765610216" target="_blank"
                   className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white px-8 py-3 rounded-xl font-black shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2 group"
                 >
                   <span>Get Started Free</span>
@@ -188,7 +188,7 @@ export default function Header() {
                     <span>Call Now</span>
                   </a>
                   <Link 
-                    href="/contact"
+                   href="https://wa.me/918765610216" target="_blank"
                     className="w-full bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white px-6 py-3 rounded-xl font-black shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 group"
                     onClick={() => setIsMenuOpen(false)}
                   >
